@@ -1,0 +1,25 @@
+NodeJS REST API
+
+Entities
+  Questions
+    id, status, description, options (nullable), creationDate and modifiedDate
+  Answers
+    id, key, name, answer, questionId, creationDate and modifiedDate
+  Users
+    id, name, role, creationDate and modifiedDate
+
+REST Methods
+  For Answers and Questions
+    POST    /api/answers            or  /api/questions                Creates new answer/question
+    GET     /api/answer             or  /api/questions                Gets all answers/questions
+    GET     /api/answer/:answerID   or  /api/questions/:questionID    Gets an answer/question
+    PATCH   /api/answer/:answerID   or  /api/questions/:questionID    Updates an answer/question
+    DELETE  /api/answer/:answerID   or  /api/questions/:questionID    Deletes an answer/question
+  For Users
+    POST    /api/users/register               Registers new user
+    GET     /api/users/:userId                Retrieves user's information
+    PATCH    /api/users/change-role/:userId   Updates user's role
+
+Authentication should support OAuth2
+
+Uses MongoDB as standard database
