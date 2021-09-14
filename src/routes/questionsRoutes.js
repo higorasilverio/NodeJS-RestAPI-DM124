@@ -1,16 +1,13 @@
+import { addNewQuestion } from "../controllers/controller";
+
 const questionsRoutes = (app) => {
   app
     .route("/api/questions")
-    .post(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("POST request successful!");
-      }
-    )
+    .post((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, addNewQuestion)
     .get(
       (req, res, next) => {
         //middleware
