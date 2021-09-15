@@ -1,6 +1,7 @@
 import {
   addNewQuestion,
   getQuestions,
+  getQuestionWithId,
 } from "../controllers/standardController";
 
 const questionsRoutes = (app) => {
@@ -18,17 +19,12 @@ const questionsRoutes = (app) => {
     }, getQuestions);
 
   app
-    .route("/api/questions/:questionID")
-    .get(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("GET request successful!");
-      }
-    )
+    .route("/api/questions/:questionId")
+    .get((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, getQuestionWithId)
     .patch(
       (req, res, next) => {
         //middleware

@@ -1,4 +1,8 @@
-import { addNewAnswer, getAnswers } from "../controllers/standardController";
+import {
+  addNewAnswer,
+  getAnswers,
+  getAnswerWithId,
+} from "../controllers/standardController";
 
 const answersRoutes = (app) => {
   app
@@ -15,17 +19,12 @@ const answersRoutes = (app) => {
     }, getAnswers);
 
   app
-    .route("/api/answers/:answerID")
-    .get(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("GET request successful!");
-      }
-    )
+    .route("/api/answers/:answerId")
+    .get((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, getAnswerWithId)
     .patch(
       (req, res, next) => {
         //middleware

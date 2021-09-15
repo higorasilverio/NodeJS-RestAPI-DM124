@@ -26,6 +26,15 @@ export const getQuestions = (req, res) => {
   });
 };
 
+export const getQuestionWithId = (req, res) => {
+  Question.findById(req.params.questionId, (err, question) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(question);
+  });
+};
+
 export const addNewAnswer = (req, res) => {
   let newAnswer = new Answer(req.body);
   newAnswer.save((err, answer) => {
@@ -45,9 +54,27 @@ export const getAnswers = (req, res) => {
   });
 };
 
+export const getAnswerWithId = (req, res) => {
+  Answer.findById(req.params.answerId, (err, answer) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(answer);
+  });
+};
+
 export const registerUser = (req, res) => {
   let newUser = new User(req.body);
   newUser.save((err, user) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(user);
+  });
+};
+
+export const getUserWithId = (req, res) => {
+  User.findById(req.params.userId, (err, user) => {
     if (err) {
       res.send(err);
     }
