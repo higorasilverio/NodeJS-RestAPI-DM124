@@ -2,6 +2,7 @@ import {
   addNewQuestion,
   getQuestions,
   getQuestionWithId,
+  updateQuestion,
 } from "../controllers/standardController";
 
 const questionsRoutes = (app) => {
@@ -25,16 +26,11 @@ const questionsRoutes = (app) => {
       console.log(`${req.method} request from: ${req.originalUrl}`);
       next();
     }, getQuestionWithId)
-    .patch(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("PATCH request successful!");
-      }
-    )
+    .patch((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, updateQuestion)
     .delete(
       (req, res, next) => {
         //middleware

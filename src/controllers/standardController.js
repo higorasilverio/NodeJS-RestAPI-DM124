@@ -35,6 +35,21 @@ export const getQuestionWithId = (req, res) => {
   });
 };
 
+export const updateQuestion = (req, res) => {
+  const body = { ...req.body, modifiedDate: Date.now().toString() };
+  Question.findOneAndUpdate(
+    { _id: req.params.questionId },
+    body,
+    { new: true, useFindAndModify: false },
+    (err, question) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(question);
+    }
+  );
+};
+
 export const addNewAnswer = (req, res) => {
   let newAnswer = new Answer(req.body);
   newAnswer.save((err, answer) => {
@@ -63,6 +78,21 @@ export const getAnswerWithId = (req, res) => {
   });
 };
 
+export const updateAnswer = (req, res) => {
+  const body = { ...req.body, modifiedDate: Date.now().toString() };
+  Answer.findOneAndUpdate(
+    { _id: req.params.answerId },
+    body,
+    { new: true, useFindAndModify: false },
+    (err, answer) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(answer);
+    }
+  );
+};
+
 export const registerUser = (req, res) => {
   let newUser = new User(req.body);
   newUser.save((err, user) => {
@@ -80,4 +110,22 @@ export const getUserWithId = (req, res) => {
     }
     res.json(user);
   });
+};
+
+export const updateUserRole = (req, res) => {
+  if (!req.body.role) {
+    res.status(400).send("Role description is madatory!");
+  }
+  const body = { role: req.body.role, modifiedDate: Date.now().toString() };
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    body,
+    { new: true, useFindAndModify: false },
+    (err, user) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(user);
+    }
+  );
 };

@@ -1,4 +1,8 @@
-import { registerUser, getUserWithId } from "../controllers/standardController";
+import {
+  registerUser,
+  getUserWithId,
+  updateUserRole,
+} from "../controllers/standardController";
 
 const usersRoutes = (app) => {
   app.route("/api/users/register").post((req, res, next) => {
@@ -13,16 +17,11 @@ const usersRoutes = (app) => {
     next();
   }, getUserWithId);
 
-  app.route("/api/users/change-role/:userId").patch(
-    (req, res, next) => {
-      //middleware
-      console.log(`${req.method} request from: ${req.originalUrl}`);
-      next();
-    },
-    (req, res, next) => {
-      res.send("PATCH request successful!");
-    }
-  );
+  app.route("/api/users/change-role/:userId").patch((req, res, next) => {
+    //middleware
+    console.log(`${req.method} request from: ${req.originalUrl}`);
+    next();
+  }, updateUserRole);
 };
 
 export default usersRoutes;
