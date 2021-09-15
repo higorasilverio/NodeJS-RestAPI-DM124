@@ -1,4 +1,4 @@
-import { addNewQuestion } from "../controllers/controller";
+import { addNewQuestion } from "../controllers/standardController";
 
 const questionsRoutes = (app) => {
   app

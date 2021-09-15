@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
-import { QuestionSchema, AnswerSchema, UserSchema } from "../models/model";
+import { QuestionSchema } from "../models/questionModel";
+import { AnswerSchema } from "../models/answerModel";
+import { UserSchema } from "../models/userModel";
 
 const Question = mongoose.model("Question", QuestionSchema);
 const Answer = mongoose.model("Answer", AnswerSchema);
@@ -9,11 +11,9 @@ export const addNewQuestion = async (req, res) => {
   let newQuestion = new Question(req.body);
   console.log(newQuestion);
   await newQuestion.save((err, question) => {
-    console.log(err, question);
     if (err) {
       res.send(err);
     }
-    console.log(question);
     res.json(question);
   });
 };
