@@ -1,4 +1,7 @@
-import { addNewQuestion } from "../controllers/standardController";
+import {
+  addNewQuestion,
+  getQuestions,
+} from "../controllers/standardController";
 
 const questionsRoutes = (app) => {
   app
@@ -8,16 +11,11 @@ const questionsRoutes = (app) => {
       console.log(`${req.method} request from: ${req.originalUrl}`);
       next();
     }, addNewQuestion)
-    .get(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("GET request successful!");
-      }
-    );
+    .get((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, getQuestions);
 
   app
     .route("/api/questions/:questionID")
