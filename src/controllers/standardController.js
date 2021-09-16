@@ -113,6 +113,9 @@ export const deleteAnswer = (req, res) => {
 
 export const registerUser = (req, res) => {
   let newUser = new User(req.body);
+  if (newUser.role && newUser.role !== "admin") {
+    newUser.role = "user";
+  }
   newUser.save((err, user) => {
     if (err) {
       res.send(err);
