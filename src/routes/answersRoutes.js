@@ -3,6 +3,7 @@ import {
   getAnswers,
   getAnswerWithId,
   updateAnswer,
+  deleteAnswer,
 } from "../controllers/standardController";
 
 const answersRoutes = (app) => {
@@ -31,16 +32,11 @@ const answersRoutes = (app) => {
       console.log(`${req.method} request from: ${req.originalUrl}`);
       next();
     }, updateAnswer)
-    .delete(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("DELETE request successful!");
-      }
-    );
+    .delete((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, deleteAnswer);
 };
 
 export default answersRoutes;

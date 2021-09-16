@@ -50,6 +50,15 @@ export const updateQuestion = (req, res) => {
   );
 };
 
+export const deleteQuestion = (req, res) => {
+  Question.deleteOne({ _id: req.params.questionId }, (err, question) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: "Question deleted successfuly" });
+  });
+};
+
 export const addNewAnswer = (req, res) => {
   let newAnswer = new Answer(req.body);
   newAnswer.save((err, answer) => {
@@ -93,6 +102,15 @@ export const updateAnswer = (req, res) => {
   );
 };
 
+export const deleteAnswer = (req, res) => {
+  Answer.deleteOne({ _id: req.params.answerId }, (err, answer) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: "Answer deleted successfuly" });
+  });
+};
+
 export const registerUser = (req, res) => {
   let newUser = new User(req.body);
   newUser.save((err, user) => {
@@ -114,7 +132,7 @@ export const getUserWithId = (req, res) => {
 
 export const updateUserRole = (req, res) => {
   if (!req.body.role) {
-    res.status(400).send("Role description is madatory!");
+    res.status(400).send({ message: "Role description is madatory!" });
   }
   const body = { role: req.body.role, modifiedDate: Date.now().toString() };
   User.findOneAndUpdate(

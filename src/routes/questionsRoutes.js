@@ -3,6 +3,7 @@ import {
   getQuestions,
   getQuestionWithId,
   updateQuestion,
+  deleteQuestion,
 } from "../controllers/standardController";
 
 const questionsRoutes = (app) => {
@@ -31,16 +32,11 @@ const questionsRoutes = (app) => {
       console.log(`${req.method} request from: ${req.originalUrl}`);
       next();
     }, updateQuestion)
-    .delete(
-      (req, res, next) => {
-        //middleware
-        console.log(`${req.method} request from: ${req.originalUrl}`);
-        next();
-      },
-      (req, res, next) => {
-        res.send("DELETE request successful!");
-      }
-    );
+    .delete((req, res, next) => {
+      //middleware
+      console.log(`${req.method} request from: ${req.originalUrl}`);
+      next();
+    }, deleteQuestion);
 };
 
 export default questionsRoutes;
