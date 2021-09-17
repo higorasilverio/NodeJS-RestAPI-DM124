@@ -1,0 +1,11 @@
+const Mongoose = require("mongoose");
+
+const userSchema = new Mongoose.Schema({
+  name: { type: String, required: "Enter the user's name" },
+  role: { type: String, default: "user" },
+  creationDate: { type: Date, default: Date.now },
+  modifiedDate: { type: Date, default: Date.now },
+});
+
+//mocha workaround
+module.exports = Mongoose.models.user || Mongoose.model("user", userSchema);

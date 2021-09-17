@@ -1,6 +1,6 @@
-const ICrud = require("../interfaces/interfaceCrud");
+const IDb = require("./interfaceDb");
 
-class ContextStrategy extends ICrud {
+class ContextStrategy extends IDb {
   constructor(database) {
     super();
     this._database = database;
