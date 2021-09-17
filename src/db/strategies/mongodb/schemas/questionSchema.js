@@ -1,11 +1,12 @@
 const Mongoose = require("mongoose");
 
-const userSchema = new Mongoose.Schema({
-  name: { type: String, required: "Enter the user's name" },
-  role: { type: String, default: "user" },
+const questionSchema = new Mongoose.Schema({
+  status: { type: String, required: "Enter the question status" },
+  description: { type: String, required: "Enter the question description" },
+  options: String,
   creationDate: { type: Date, default: Date.now },
   modifiedDate: { type: Date, default: Date.now },
 });
 
-//mocha workaround
-module.exports = Mongoose.models.user || Mongoose.model("user", userSchema);
+module.exports =
+  Mongoose.models.question || Mongoose.model("question", questionSchema);

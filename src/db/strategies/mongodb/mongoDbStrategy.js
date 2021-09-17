@@ -41,8 +41,8 @@ class MongoDB extends ICrud {
     return this._collection.create(item);
   }
 
-  async read(item = {}) {
-    return this._collection.find(item, { nome: 1, poder: 1, insertedAt: 1 });
+  async read() {
+    return this._collection.find({});
   }
 
   async update(id, item) {

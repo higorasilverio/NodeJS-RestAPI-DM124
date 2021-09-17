@@ -24,6 +24,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "hapi": "^18.1.0",
     "mongoose": "^5.3.11"
   }
 }
