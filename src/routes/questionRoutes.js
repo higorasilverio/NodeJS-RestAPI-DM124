@@ -1,3 +1,4 @@
+const questionSchema = require("../db/strategies/mongodb/schemas/questionSchema");
 const BaseRoute = require("./base/baseRoute");
 
 class HeroRoutes extends BaseRoute {
@@ -11,7 +12,16 @@ class HeroRoutes extends BaseRoute {
       path: "/api/questions",
       method: "GET",
       handler: (request, headers) => {
-        return this.db.read();
+        try {
+          const { skip, limit, description } = request.query;
+          let query = description
+            ? { description: { $regex: `.*${description}` } }
+            : {};
+          return this.db.read(query, skip, limit);
+        } catch (error) {
+          console.log({ error });
+          return "Internal server error";
+        }
       },
     };
   }
