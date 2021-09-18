@@ -37,5 +37,24 @@ class HeroRoutes extends BaseRoute {
       },
     };
   }
+
+  update() {
+    return {
+      path: "/api/questions/{id}",
+      method: "PATCH",
+      handler: async (request, headers) => {
+        try {
+          const { id } = request.params;
+          const { payload } = request;
+          const stringData = JSON.stringify(payload);
+          const data = JSON.parse(stringData);
+          return await this.db.update(id, data);
+        } catch (error) {
+          console.log({ error });
+          return "Internal server error";
+        }
+      },
+    };
+  }
 }
 module.exports = HeroRoutes;
