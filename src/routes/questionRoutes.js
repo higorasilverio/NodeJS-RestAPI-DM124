@@ -30,8 +30,18 @@ class HeroRoutes extends BaseRoute {
     return {
       path: "/api/questions",
       method: "POST",
-      handler: (request, headers) => {
-        return this.db.create();
+      handler: async (request, headers) => {
+        try {
+          console.log("Entered");
+          const { status, description, options } = request.payload;
+          console.log("request.payload", status, description, options);
+          const result = await this.db.create({ status, description, options });
+          console.log("result", result);
+          return result;
+        } catch (error) {
+          console.log({ error });
+          return "Internal server error";
+        }
       },
     };
   }

@@ -4,7 +4,6 @@
   "description": "NodeJS REST API with Questions, Answers, and Users entities",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./connection.js --exec babel-node -e js",
     "test": "mocha -w ./tests/*.test.js"
   },
   "repository": {
