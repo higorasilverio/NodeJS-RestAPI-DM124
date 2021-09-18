@@ -13,11 +13,7 @@ class HeroRoutes extends BaseRoute {
       method: "GET",
       handler: (request, headers) => {
         try {
-          const { skip, limit, description } = request.query;
-          let query = description
-            ? { description: { $regex: `.*${description}` } }
-            : {};
-          return this.db.read(query, skip, limit);
+          return this.db.read();
         } catch (error) {
           console.log({ error });
           return "Internal server error";
@@ -32,12 +28,8 @@ class HeroRoutes extends BaseRoute {
       method: "POST",
       handler: async (request, headers) => {
         try {
-          console.log("Entered");
           const { status, description, options } = request.payload;
-          console.log("request.payload", status, description, options);
-          const result = await this.db.create({ status, description, options });
-          console.log("result", result);
-          return result;
+          return await this.db.create({ status, description, options });
         } catch (error) {
           console.log({ error });
           return "Internal server error";

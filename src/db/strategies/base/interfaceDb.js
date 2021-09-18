@@ -9,7 +9,7 @@ class IDb {
     throw new NotImplementedException();
   }
 
-  read(item) {
+  read() {
     throw new NotImplementedException();
   }
 
