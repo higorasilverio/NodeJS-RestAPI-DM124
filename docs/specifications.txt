@@ -20,6 +20,8 @@ REST Methods
     GET     /api/users/:userId    Retrieves user's information
     PATCH   /api/users/:userId    Updates user's role
     DELETE  /api/users/:userId    Delete user
+  For Swagger documentation
+    GET     /documentation        On browser, show API documentation
 
 Authentication should support OAuth2
 
