@@ -44,7 +44,11 @@ class UserRoutes extends BaseRoute {
             payloadType: "form",
           },
         },
+<<<<<<< HEAD
         tags: ["api", "users"],
+=======
+        tags: ["api"],
+>>>>>>> dd322d892e0d2e59c32560be3bfd785db2fb9b2d
         validate: {
           payload: Joi.object({
             name: Joi.string().required().description("User's name"),
@@ -90,7 +94,11 @@ class UserRoutes extends BaseRoute {
             payloadType: "form",
           },
         },
+<<<<<<< HEAD
         tags: ["api", "users"],
+=======
+        tags: ["api"],
+>>>>>>> dd322d892e0d2e59c32560be3bfd785db2fb9b2d
       },
     };
   }
@@ -137,7 +145,11 @@ class UserRoutes extends BaseRoute {
             payloadType: "form",
           },
         },
+<<<<<<< HEAD
         tags: ["api", "users"],
+=======
+        tags: ["api"],
+>>>>>>> dd322d892e0d2e59c32560be3bfd785db2fb9b2d
         validate: {
           payload: Joi.object({
             role: Joi.string().default("user").description("User's role"),
@@ -183,7 +195,11 @@ class UserRoutes extends BaseRoute {
             payloadType: "form",
           },
         },
+<<<<<<< HEAD
         tags: ["api", "users"],
+=======
+        tags: ["api"],
+>>>>>>> dd322d892e0d2e59c32560be3bfd785db2fb9b2d
         validate: {
           params: Joi.object({
             id: Joi.string().description("User's id"),
