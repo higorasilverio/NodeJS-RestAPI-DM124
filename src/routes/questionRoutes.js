@@ -2,15 +2,11 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
-const Question = Joi.object().keys({
-  _id: Joi.string(),
-  status: Joi.string(),
-  description: Joi.string(),
-  options: Joi.string(),
-  creationDate: Joi.date(),
-  modifiedDate: Joi.date(),
-  __v: Joi.number(),
-});
+const {
+  QuestionSchema,
+  PathParam,
+  Message,
+} = require("../utils/joiObjectUtils");
 
 class QuestionRoutes extends BaseRoute {
   constructor(db) {
@@ -40,15 +36,7 @@ class QuestionRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  status: Joi.string(),
-                  description: Joi.string(),
-                  options: Joi.string(),
-                  creationDate: Joi.date(),
-                  modifiedDate: Joi.date(),
-                  __v: Joi.number(),
-                }),
+                schema: QuestionSchema,
               },
             },
             payloadType: "form",
@@ -90,7 +78,7 @@ class QuestionRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.array().items(Question),
+                schema: Joi.array().items(QuestionSchema),
               },
             },
             payloadType: "form",
@@ -123,15 +111,7 @@ class QuestionRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  status: Joi.string(),
-                  description: Joi.string(),
-                  options: Joi.string(),
-                  creationDate: Joi.date(),
-                  modifiedDate: Joi.date(),
-                  __v: Joi.number(),
-                }),
+                schema: QuestionSchema,
               },
             },
             payloadType: "form",
@@ -139,9 +119,7 @@ class QuestionRoutes extends BaseRoute {
         },
         tags: ["api", "questions"],
         validate: {
-          params: Joi.object({
-            id: Joi.string().description("Question's id"),
-          }),
+          params: PathParam,
         },
       },
     };
@@ -176,10 +154,7 @@ class QuestionRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -194,9 +169,7 @@ class QuestionRoutes extends BaseRoute {
               .default("")
               .description("Question optional aditions"),
           }),
-          params: Joi.object({
-            id: Joi.string().description("Question's id"),
-          }),
+          params: PathParam,
         },
       },
     };
@@ -226,10 +199,7 @@ class QuestionRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -237,9 +207,7 @@ class QuestionRoutes extends BaseRoute {
         },
         tags: ["api", "questions"],
         validate: {
-          params: Joi.object({
-            id: Joi.string().description("Question's id"),
-          }),
+          params: PathParam,
         },
       },
     };

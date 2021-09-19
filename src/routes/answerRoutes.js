@@ -2,16 +2,7 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
-const Answer = Joi.object().keys({
-  questionId: Joi.array().items(Joi.string()),
-  _id: Joi.string(),
-  key: Joi.string(),
-  name: Joi.string(),
-  answer: Joi.string(),
-  creationDate: Joi.date(),
-  modifiedDate: Joi.date(),
-  __v: Joi.number(),
-});
+const { Message, AnswerSchema, PathParam } = require("../utils/joiObjectUtils");
 
 class AnswerRoutes extends BaseRoute {
   constructor(db) {
@@ -41,7 +32,7 @@ class AnswerRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Answer,
+                schema: AnswerSchema,
               },
             },
             payloadType: "form",
@@ -82,7 +73,7 @@ class AnswerRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.array().items(Answer),
+                schema: Joi.array().items(AnswerSchema),
               },
             },
             payloadType: "form",
@@ -115,7 +106,7 @@ class AnswerRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Answer,
+                schema: AnswerSchema,
               },
             },
             payloadType: "form",
@@ -123,9 +114,7 @@ class AnswerRoutes extends BaseRoute {
         },
         tags: ["api", "answers"],
         validate: {
-          params: Joi.object({
-            id: Joi.string().description("Answer's id"),
-          }),
+          params: PathParam,
         },
       },
     };
@@ -160,10 +149,7 @@ class AnswerRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -179,9 +165,7 @@ class AnswerRoutes extends BaseRoute {
             name: Joi.string().description("Answer source name"),
             answer: Joi.string().description("Proper answer"),
           }),
-          params: Joi.object({
-            id: Joi.string().description("Answer's id"),
-          }),
+          params: PathParam,
         },
       },
     };
@@ -211,10 +195,7 @@ class AnswerRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -222,9 +203,7 @@ class AnswerRoutes extends BaseRoute {
         },
         tags: ["api", "answers"],
         validate: {
-          params: Joi.object({
-            id: Joi.string().description("Answer's id"),
-          }),
+          params: PathParam,
         },
       },
     };

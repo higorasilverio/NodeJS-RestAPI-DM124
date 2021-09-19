@@ -2,6 +2,8 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
+const { UserSchema, Message, PathParam } = require("../utils/joiObjectUtils");
+
 class UserRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -31,14 +33,7 @@ class UserRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  role: Joi.string(),
-                  _id: Joi.string(),
-                  name: Joi.string(),
-                  creationDate: Joi.date(),
-                  modifiedDate: Joi.date(),
-                  __v: Joi.number(),
-                }),
+                schema: UserSchema,
               },
             },
             payloadType: "form",
@@ -77,20 +72,16 @@ class UserRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  role: Joi.string(),
-                  _id: Joi.string(),
-                  name: Joi.string(),
-                  creationDate: Joi.date(),
-                  modifiedDate: Joi.date(),
-                  __v: Joi.number(),
-                }),
+                schema: UserSchema,
               },
             },
             payloadType: "form",
           },
         },
         tags: ["api", "users"],
+        validate: {
+          params: PathParam,
+        },
       },
     };
   }
@@ -128,10 +119,7 @@ class UserRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -142,9 +130,7 @@ class UserRoutes extends BaseRoute {
           payload: Joi.object({
             role: Joi.string().default("user").description("User's role"),
           }),
-          params: Joi.object({
-            id: Joi.string().description("User's id"),
-          }),
+          params: PathParam,
         },
       },
     };
@@ -174,10 +160,7 @@ class UserRoutes extends BaseRoute {
             responses: {
               200: {
                 description: "Success",
-                schema: Joi.object().keys({
-                  _id: Joi.string(),
-                  message: Joi.string(),
-                }),
+                schema: Message,
               },
             },
             payloadType: "form",
@@ -185,9 +168,7 @@ class UserRoutes extends BaseRoute {
         },
         tags: ["api", "users"],
         validate: {
-          params: Joi.object({
-            id: Joi.string().description("User's id"),
-          }),
+          params: PathParam,
         },
       },
     };
