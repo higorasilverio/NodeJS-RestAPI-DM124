@@ -25,7 +25,7 @@ class UserRoutes extends BaseRoute {
         },
         description: "Create user",
         notes:
-          "Returns the user created using payloaf parameters name and role",
+          "Returns the user created using payload parameters name and role",
         plugins: {
           "hapi-swagger": {
             responses: {
