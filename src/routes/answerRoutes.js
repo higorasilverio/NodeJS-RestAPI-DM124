@@ -66,7 +66,10 @@ class AnswerRoutes extends BaseRoute {
           const stringData = JSON.stringify(payload);
           let data = JSON.parse(stringData);
           data = { ...data, modifiedDate: Date.now() };
-          return await this.db.update(id, data);
+          const result = await this.db.update(id, data);
+          return result.n === 1
+            ? { _id: id, message: "answer updated successfully" }
+            : { _id: id, message: "answer couldn't be updated" };
         } catch (error) {
           console.log({ error });
           return Boom.internal();
@@ -82,7 +85,10 @@ class AnswerRoutes extends BaseRoute {
       handler: async (request, headers) => {
         try {
           const { id } = request.params;
-          return await this.db.delete(id);
+          const result = await this.db.delete(id);
+          return result.n === 1
+            ? { _id: id, message: "answer deleted successfully" }
+            : { _id: id, message: "answer couldn't be deleted" };
         } catch (error) {
           console.log({ error });
           return Boom.internal();
