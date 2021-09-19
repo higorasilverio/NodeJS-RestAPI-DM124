@@ -16,9 +16,10 @@ REST Methods
     PATCH   /api/answer/:answerID   or  /api/questions/:questionID    Updates an answer/question
     DELETE  /api/answer/:answerID   or  /api/questions/:questionID    Deletes an answer/question
   For Users
-    POST    /api/users/register               Registers new user
-    GET     /api/users/:userId                Retrieves user's information
-    PATCH    /api/users/change-role/:userId   Updates user's role
+    POST    /api/users            Registers new user
+    GET     /api/users/:userId    Retrieves user's information
+    PATCH   /api/users/:userId    Updates user's role
+    DELETE  /api/users/:userId    Delete user
 
 Authentication should support OAuth2
 
