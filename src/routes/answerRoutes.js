@@ -1,7 +1,7 @@
 const BaseRoute = require("./base/baseRoute");
 const Boom = require("boom");
 
-class QuestionRoutes extends BaseRoute {
+class AnswerRoutes extends BaseRoute {
   constructor(db) {
     super();
     this.db = db;
@@ -9,12 +9,12 @@ class QuestionRoutes extends BaseRoute {
 
   create() {
     return {
-      path: "/api/questions",
+      path: "/api/answers",
       method: "POST",
       handler: async (request, headers) => {
         try {
-          const { status, description, options } = request.payload;
-          return await this.db.create({ status, description, options });
+          const { key, name, answer, questionId } = request.payload;
+          return await this.db.create({ key, name, answer, questionId });
         } catch (error) {
           console.log({ error });
           return Boom.internal();
@@ -25,7 +25,7 @@ class QuestionRoutes extends BaseRoute {
 
   list() {
     return {
-      path: "/api/questions",
+      path: "/api/answers",
       method: "GET",
       handler: (request, headers) => {
         try {
@@ -40,7 +40,7 @@ class QuestionRoutes extends BaseRoute {
 
   getOne() {
     return {
-      path: "/api/questions/{id}",
+      path: "/api/answers/{id}",
       method: "GET",
       handler: async (request, headers) => {
         try {
@@ -57,7 +57,7 @@ class QuestionRoutes extends BaseRoute {
 
   update() {
     return {
-      path: "/api/questions/{id}",
+      path: "/api/answers/{id}",
       method: "PATCH",
       handler: async (request, headers) => {
         try {
@@ -77,7 +77,7 @@ class QuestionRoutes extends BaseRoute {
 
   delete(id) {
     return {
-      path: "/api/questions/{id}",
+      path: "/api/answers/{id}",
       method: "DELETE",
       handler: async (request, headers) => {
         try {
@@ -92,4 +92,4 @@ class QuestionRoutes extends BaseRoute {
   }
 }
 
-module.exports = QuestionRoutes;
+module.exports = AnswerRoutes;
