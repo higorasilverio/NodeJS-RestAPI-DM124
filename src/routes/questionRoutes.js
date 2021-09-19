@@ -1,7 +1,7 @@
-const questionSchema = require("../db/strategies/mongodb/schemas/questionSchema");
 const BaseRoute = require("./base/baseRoute");
+const Boom = require("boom");
 
-class HeroRoutes extends BaseRoute {
+class QuestionRoutes extends BaseRoute {
   constructor(db) {
     super();
     this.db = db;
@@ -16,7 +16,7 @@ class HeroRoutes extends BaseRoute {
           return this.db.read();
         } catch (error) {
           console.log({ error });
-          return "Internal server error";
+          return Boom.internal();
         }
       },
     };
@@ -32,7 +32,24 @@ class HeroRoutes extends BaseRoute {
           return await this.db.create({ status, description, options });
         } catch (error) {
           console.log({ error });
-          return "Internal server error";
+          return Boom.internal();
+        }
+      },
+    };
+  }
+
+  getOne() {
+    return {
+      path: "/api/questions/{id}",
+      method: "GET",
+      handler: async (request, headers) => {
+        try {
+          const { id } = request.params;
+          const result = await this.db.find(id);
+          return result ? result : {};
+        } catch (error) {
+          console.log({ error });
+          return Boom.internal();
         }
       },
     };
@@ -51,7 +68,7 @@ class HeroRoutes extends BaseRoute {
           return await this.db.update(id, data);
         } catch (error) {
           console.log({ error });
-          return "Internal server error";
+          return Boom.internal();
         }
       },
     };
@@ -67,10 +84,11 @@ class HeroRoutes extends BaseRoute {
           return await this.db.delete(id);
         } catch (error) {
           console.log({ error });
-          return "Internal server error";
+          return Boom.internal();
         }
       },
     };
   }
 }
-module.exports = HeroRoutes;
+
+module.exports = QuestionRoutes;

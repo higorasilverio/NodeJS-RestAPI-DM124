@@ -9,7 +9,11 @@ class IDb {
     throw new NotImplementedException();
   }
 
-  read() {
+  read(item) {
+    throw new NotImplementedException();
+  }
+
+  find(id) {
     throw new NotImplementedException();
   }
 

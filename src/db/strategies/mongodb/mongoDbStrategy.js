@@ -45,6 +45,12 @@ class MongoDB extends ICrud {
     return this._collection.find();
   }
 
+  async find(id) {
+    return Mongoose.Types.ObjectId.isValid(id)
+      ? this._collection.findById(id)
+      : null;
+  }
+
   async update(id, item) {
     return this._collection.updateOne({ _id: id }, { $set: item });
   }
