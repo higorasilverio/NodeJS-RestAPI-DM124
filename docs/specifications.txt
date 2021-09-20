@@ -6,7 +6,7 @@ Entities
   Answers
     id, key, name, answer, questionId, creationDate and modifiedDate
   Users
-    id, name, role, creationDate and modifiedDate
+    id, password, name, role, creationDate and modifiedDate
 
 REST Methods
   For Answers and Questions
@@ -22,6 +22,8 @@ REST Methods
     DELETE  /api/users/:userId    Delete user
   For Swagger documentation
     GET     /documentation        On browser, show API documentation
+  For Authentication
+    POST    /api/login            Returns token for API usage
 
 Authentication should support OAuth2
 
