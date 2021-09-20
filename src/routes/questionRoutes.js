@@ -6,6 +6,7 @@ const {
   QuestionSchema,
   PathParam,
   Message,
+  Headers,
 } = require("../utils/joiObjectUtils");
 
 class QuestionRoutes extends BaseRoute {
@@ -53,6 +54,7 @@ class QuestionRoutes extends BaseRoute {
               .default("")
               .description("Question optional aditions"),
           }),
+          headers: Headers,
         },
       },
     };
@@ -85,6 +87,9 @@ class QuestionRoutes extends BaseRoute {
           },
         },
         tags: ["api", "questions"],
+        validate: {
+          headers: Headers,
+        },
       },
     };
   }
@@ -120,6 +125,7 @@ class QuestionRoutes extends BaseRoute {
         tags: ["api", "questions"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -170,6 +176,7 @@ class QuestionRoutes extends BaseRoute {
               .description("Question optional aditions"),
           }),
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -208,6 +215,7 @@ class QuestionRoutes extends BaseRoute {
         tags: ["api", "questions"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };

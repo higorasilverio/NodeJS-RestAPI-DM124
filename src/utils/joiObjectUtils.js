@@ -24,6 +24,7 @@ module.exports = {
     role: Joi.string(),
     _id: Joi.string(),
     name: Joi.string(),
+    password: Joi.string(),
     creationDate: Joi.date(),
     modifiedDate: Joi.date(),
     __v: Joi.number(),
@@ -35,4 +36,7 @@ module.exports = {
   PathParam: Joi.object({
     id: Joi.string().description("Entity identifier from path param"),
   }),
+  Headers: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
 };
