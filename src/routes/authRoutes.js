@@ -35,8 +35,9 @@ class AuthRoutes extends BaseRoute {
             }
             const token = Jwt.sign(
               {
-                username: user,
-                id: 1,
+                username: userToLogIn.name,
+                id: userToLogIn._id,
+                role: userToLogIn.role,
               },
               this.secret
             );
