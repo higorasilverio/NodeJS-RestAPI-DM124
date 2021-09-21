@@ -4,9 +4,7 @@ const Boom = require("boom");
 const Jwt = require("jsonwebtoken");
 
 const { UserSchema } = require("../utils/joiObjectUtils");
-
-const userToCheck = "user";
-const passwordToCheck = "123";
+const PasswordHelper = require("./../helpers/passwordHelper");
 
 class AuthRoutes extends BaseRoute {
   constructor(db, secret) {
@@ -23,8 +21,17 @@ class AuthRoutes extends BaseRoute {
         handler: async (request, headers) => {
           try {
             const { user, password } = request.payload;
-            if (user !== userToCheck && password !== passwordToCheck) {
-              return Boom.unauthorized();
+            const users = await this.db.read();
+            const userToLogIn = users.find((usr) => usr.name === user);
+            if (!userToLogIn) {
+              return Boom.notFound("User not found");
+            }
+            const passwordToAuthenticate = await PasswordHelper.comparePassword(
+              password,
+              userToLogIn.password
+            );
+            if (!passwordToAuthenticate) {
+              return Boom.unauthorized("Invalid user or password");
             }
             const token = Jwt.sign(
               {
@@ -33,7 +40,7 @@ class AuthRoutes extends BaseRoute {
               },
               this.secret
             );
-            return token;
+            return { authenticationToken: token };
           } catch (error) {
             console.log({ error });
             return Boom.internal();

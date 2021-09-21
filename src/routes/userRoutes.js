@@ -2,6 +2,8 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
+const PasswordHelper = require("./../helpers/passwordHelper");
+
 const {
   UserSchema,
   Message,
@@ -24,6 +26,7 @@ class UserRoutes extends BaseRoute {
           try {
             let { name, password, role } = request.payload;
             role = role === "admin" ? "admin" : "user";
+            password = await PasswordHelper.hashPassword(password);
             return await this.db.create({ name, password, role });
           } catch (error) {
             console.log({ error });

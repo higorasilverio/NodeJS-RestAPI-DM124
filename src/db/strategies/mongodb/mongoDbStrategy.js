@@ -29,11 +29,11 @@ class MongoDB extends ICrud {
       },
       function (error) {
         if (!error) return;
-        console.log("Falha na conexão!", error);
+        console.log("Connection fail", error);
       }
     );
     const connection = Mongoose.connection;
-    connection.once("open", () => console.log("database is up"));
+    connection.once("open", () => console.log("Database is up"));
     return connection;
   }
 

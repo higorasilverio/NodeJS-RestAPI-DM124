@@ -9,13 +9,13 @@ const pckjson = require("./package.json");
 
 const Context = require("./src/db/strategies/base/contextStrategy");
 const MongoDb = require("./src/db/strategies/mongodb/mongoDbStrategy");
+const AuthRoutes = require("./src/routes/authRoutes");
+const UserRoutes = require("./src/routes/userRoutes");
 const QuestionRoute = require("./src/routes/questionRoutes");
 const AnswerRoutes = require("./src/routes/answerRoutes");
-const UserRoutes = require("./src/routes/userRoutes");
-const AuthRoutes = require("./src/routes/authRoutes");
+const UserSchema = require("./src/db/strategies/mongodb/schemas/userSchema");
 const QuestionSchema = require("./src/db/strategies/mongodb/schemas/questionSchema");
 const AnswerSchema = require("./src/db/strategies/mongodb/schemas/answerSchema");
-const UserSchema = require("./src/db/strategies/mongodb/schemas/userSchema");
 
 const app = new Hapi.Server({
   port: 5000,
@@ -39,9 +39,10 @@ function mapRoutes(instance, methods) {
 
 async function main() {
   const connection = MongoDb.connect();
+  const authContext = new Context(new MongoDb(connection, UserSchema));
+  const usersContext = new Context(new MongoDb(connection, UserSchema));
   const questionsContext = new Context(new MongoDb(connection, QuestionSchema));
   const answersContext = new Context(new MongoDb(connection, AnswerSchema));
-  const usersContext = new Context(new MongoDb(connection, UserSchema));
 
   await app.register([
     HapiJwt,
@@ -64,14 +65,16 @@ async function main() {
   app.auth.default("jwt");
 
   app.route([
+    ...mapRoutes(new AuthRoutes(authContext, JWT_SECRET), AuthRoutes.methods()),
+    ...mapRoutes(new UserRoutes(usersContext), UserRoutes.methods()),
     ...mapRoutes(new QuestionRoute(questionsContext), QuestionRoute.methods()),
     ...mapRoutes(new AnswerRoutes(answersContext), AnswerRoutes.methods()),
-    ...mapRoutes(new UserRoutes(usersContext), UserRoutes.methods()),
-    ...mapRoutes(new AuthRoutes(null, JWT_SECRET), AuthRoutes.methods()),
   ]);
 
   await app.start();
-  console.log(`server running at port: ${app.info.port}`);
+  console.log(
+    `Server running at port: ${app.info.port}. Wait for the database to connect...`
+  );
 
   return app;
 }

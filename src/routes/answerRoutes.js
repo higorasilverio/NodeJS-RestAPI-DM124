@@ -64,9 +64,9 @@ class AnswerRoutes extends BaseRoute {
       path: "/api/answers",
       method: "GET",
       options: {
-        handler: (request, headers) => {
+        handler: async (request, headers) => {
           try {
-            return this.db.read();
+            return await this.db.read();
           } catch (error) {
             console.log({ error });
             return Boom.internal();
