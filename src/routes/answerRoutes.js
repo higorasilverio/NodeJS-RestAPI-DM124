@@ -2,7 +2,12 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
-const { Message, AnswerSchema, PathParam } = require("../utils/joiObjectUtils");
+const {
+  Message,
+  AnswerSchema,
+  PathParam,
+  Headers,
+} = require("../utils/joiObjectUtils");
 
 class AnswerRoutes extends BaseRoute {
   constructor(db) {
@@ -48,6 +53,7 @@ class AnswerRoutes extends BaseRoute {
             name: Joi.string().required().description("Answer source name"),
             answer: Joi.string().required().description("Proper answer"),
           }),
+          headers: Headers,
         },
       },
     };
@@ -58,9 +64,9 @@ class AnswerRoutes extends BaseRoute {
       path: "/api/answers",
       method: "GET",
       options: {
-        handler: (request, headers) => {
+        handler: async (request, headers) => {
           try {
-            return this.db.read();
+            return await this.db.read();
           } catch (error) {
             console.log({ error });
             return Boom.internal();
@@ -80,6 +86,9 @@ class AnswerRoutes extends BaseRoute {
           },
         },
         tags: ["api", "answers"],
+        validate: {
+          headers: Headers,
+        },
       },
     };
   }
@@ -115,6 +124,7 @@ class AnswerRoutes extends BaseRoute {
         tags: ["api", "answers"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -166,6 +176,7 @@ class AnswerRoutes extends BaseRoute {
             answer: Joi.string().description("Proper answer"),
           }),
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -204,6 +215,7 @@ class AnswerRoutes extends BaseRoute {
         tags: ["api", "answers"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };

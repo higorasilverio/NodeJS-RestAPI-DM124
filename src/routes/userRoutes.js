@@ -2,7 +2,14 @@ const BaseRoute = require("./base/baseRoute");
 const Joi = require("joi");
 const Boom = require("boom");
 
-const { UserSchema, Message, PathParam } = require("../utils/joiObjectUtils");
+const PasswordHelper = require("./../helpers/passwordHelper");
+
+const {
+  UserSchema,
+  Message,
+  PathParam,
+  Headers,
+} = require("../utils/joiObjectUtils");
 
 class UserRoutes extends BaseRoute {
   constructor(db) {
@@ -17,9 +24,10 @@ class UserRoutes extends BaseRoute {
       options: {
         handler: async (request, headers) => {
           try {
-            let { name, role } = request.payload;
+            let { name, password, role } = request.payload;
             role = role === "admin" ? "admin" : "user";
-            return await this.db.create({ name, role });
+            password = await PasswordHelper.hashPassword(password);
+            return await this.db.create({ name, password, role });
           } catch (error) {
             console.log({ error });
             return Boom.internal();
@@ -27,7 +35,7 @@ class UserRoutes extends BaseRoute {
         },
         description: "Create user",
         notes:
-          "Returns the user created using payload parameters name and role",
+          "Returns the user created using payload parameters name, password, and role",
         plugins: {
           "hapi-swagger": {
             responses: {
@@ -43,8 +51,10 @@ class UserRoutes extends BaseRoute {
         validate: {
           payload: Joi.object({
             name: Joi.string().required().description("User's name"),
+            password: Joi.string().required().description("User's password"),
             role: Joi.string().default("user").description("User's role"),
           }),
+          headers: Headers,
         },
       },
     };
@@ -81,6 +91,7 @@ class UserRoutes extends BaseRoute {
         tags: ["api", "users"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -131,6 +142,7 @@ class UserRoutes extends BaseRoute {
             role: Joi.string().default("user").description("User's role"),
           }),
           params: PathParam,
+          headers: Headers,
         },
       },
     };
@@ -169,6 +181,7 @@ class UserRoutes extends BaseRoute {
         tags: ["api", "users"],
         validate: {
           params: PathParam,
+          headers: Headers,
         },
       },
     };
