@@ -9,6 +9,8 @@ const {
   Headers,
 } = require("../utils/joiObjectUtils");
 
+const UpdateHelper = require("../helpers/updateHelper");
+
 class AnswerRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -139,9 +141,12 @@ class AnswerRoutes extends BaseRoute {
           try {
             const { id } = request.params;
             const { payload } = request;
-            const stringData = JSON.stringify(payload);
-            let data = JSON.parse(stringData);
-            data = { ...data, modifiedDate: Date.now() };
+            const previousPayload = await this.db.find(id);
+            const data = UpdateHelper.provideCorrectPayload(
+              "answer",
+              payload,
+              previousPayload
+            );
             const result = await this.db.update(id, data);
             return result.n === 1
               ? { _id: id, message: "answer updated successfully" }

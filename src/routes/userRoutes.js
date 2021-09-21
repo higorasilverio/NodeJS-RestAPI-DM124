@@ -11,6 +11,8 @@ const {
   Headers,
 } = require("../utils/joiObjectUtils");
 
+const UpdateHelper = require("../helpers/updateHelper");
+
 class UserRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -106,16 +108,18 @@ class UserRoutes extends BaseRoute {
           try {
             const { id } = request.params;
             const { payload } = request;
-            const stringData = JSON.stringify(payload);
-            let data = JSON.parse(stringData);
-            const result = data.role
-              ? await this.db.update(id, {
-                  role: data.role === "admin" ? "admin" : "user",
-                  modifiedDate: Date.now(),
-                })
-              : Boom.preconditionFailed("Role parameter is missing");
+            const previousPayload = await this.db.find(id);
+            const data = UpdateHelper.provideCorrectPayload(
+              "user",
+              payload,
+              previousPayload
+            );
+            const result = await this.db.update(id, data);
             return result.n === 1
-              ? { _id: id, message: "user's role updated successfully" }
+              ? {
+                  _id: id,
+                  message: `user's role updated successfully to ${data.role}`,
+                }
               : { _id: id, message: "user's role couldn't be updated" };
           } catch (error) {
             console.log({ error });
