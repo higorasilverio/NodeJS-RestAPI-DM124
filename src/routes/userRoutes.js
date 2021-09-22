@@ -32,6 +32,13 @@ class UserRoutes extends BaseRoute {
             );
           try {
             let { name, password, role } = request.payload;
+            const users = await this.db.read();
+            const existentUser = users.find(
+              (usr) => usr.name === name && usr.role === role
+            );
+            if (existentUser) {
+              return Boom.conflict("User already exists", { name, role });
+            }
             role = role === "admin" ? "admin" : "user";
             password = await PasswordHelper.hashPassword(password);
             return await this.db.create({ name, password, role });
