@@ -138,6 +138,12 @@ class AnswerRoutes extends BaseRoute {
       method: "PATCH",
       options: {
         handler: async (request, headers) => {
+          const role = headers.request.auth.artifacts.decoded.role;
+          if (role === "user") {
+            return Boom.forbidden(
+              "Answer's update allowed to admin users only"
+            );
+          }
           try {
             const { id } = request.params;
             const { payload } = request;
@@ -193,6 +199,12 @@ class AnswerRoutes extends BaseRoute {
       method: "DELETE",
       options: {
         handler: async (request, headers) => {
+          const role = headers.request.auth.artifacts.decoded.role;
+          if (role === "user") {
+            return Boom.forbidden(
+              "Answer's delete allowed to admin users only"
+            );
+          }
           try {
             const { id } = request.params;
             const result = await this.db.delete(id);
