@@ -10,6 +10,7 @@ const {
 } = require("../utils/joiObjectUtils");
 
 const UpdateHelper = require("../helpers/updateHelper");
+const invalidRole = require("./../utils/checkRoleUtils");
 
 class QuestionRoutes extends BaseRoute {
   constructor(db) {
@@ -139,12 +140,10 @@ class QuestionRoutes extends BaseRoute {
       method: "PATCH",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden(
-              "Question's update allowed to admin users only"
+              "Questions's update allowed to admin users only"
             );
-          }
           try {
             const { id } = request.params;
             const { payload } = request;
@@ -199,12 +198,10 @@ class QuestionRoutes extends BaseRoute {
       method: "DELETE",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden(
-              "Question's delete allowed to admin users only"
+              "Questions's delete allowed to admin users only"
             );
-          }
           try {
             const { id } = request.params;
             const result = await this.db.delete(id);

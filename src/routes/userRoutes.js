@@ -3,6 +3,7 @@ const Joi = require("joi");
 const Boom = require("boom");
 
 const PasswordHelper = require("./../helpers/passwordHelper");
+const invalidRole = require("./../utils/checkRoleUtils");
 
 const {
   UserSchema,
@@ -25,12 +26,10 @@ class UserRoutes extends BaseRoute {
       method: "POST",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden(
               "User's creation allowed to admin users only"
             );
-          }
           try {
             let { name, password, role } = request.payload;
             role = role === "admin" ? "admin" : "user";
@@ -74,12 +73,10 @@ class UserRoutes extends BaseRoute {
       method: "GET",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden(
               "Retrieve user's information allowed to admin users only"
             );
-          }
           try {
             const { id } = request.params;
             const result = await this.db.find(id);
@@ -117,12 +114,10 @@ class UserRoutes extends BaseRoute {
       method: "PATCH",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden(
               "User's role update allowed to admin users only"
             );
-          }
           try {
             const { id } = request.params;
             const { payload } = request;
@@ -176,10 +171,8 @@ class UserRoutes extends BaseRoute {
       method: "DELETE",
       options: {
         handler: async (request, headers) => {
-          const role = headers.request.auth.artifacts.decoded.role;
-          if (role === "user") {
+          if (invalidRole(headers))
             return Boom.forbidden("User's delete allowed to admin users only");
-          }
           try {
             const { id } = request.params;
             const result = await this.db.delete(id);
