@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "91a652ee-72ff-431a-83fc-237aa595315e",
+		"name": "NodeJS-RestAPI-DM124",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/questions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNGE0NjY0NmM1NTZiMjE2MGJkYmIxZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjMyMzIzMjg2fQ.YrTef9XeXexriK5odU_x068hkpSIfc8Ta8vT6x_8wD4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Pending\",\r\n    \"description\": \"How to learn NodeJS?\",\r\n    \"options\": \"Student\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/questions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNGE0NjY0NmM1NTZiMjE2MGJkYmIxZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjMyMzIzMjg2fQ.YrTef9XeXexriK5odU_x068hkpSIfc8Ta8vT6x_8wD4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/questions/614b475485370836b42e9139",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMjQwMDJ9.A-tW3h_0QHYxtUMgyLk8IAvX7euYuRRqe-5XuvfoZkc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Answered\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/questions/614a4f75e8f356250c0980d1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"questions",
+						"614a4f75e8f356250c0980d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/questions/614b475485370836b42e9139",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMzEwMTl9.5n44zbFTBUJcCISb6358HUzi1cNYjnT8roiA10rxYo0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/questions/614a4f75e8f356250c0980d1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"questions",
+						"614a4f75e8f356250c0980d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/questions/614b475485370836b42e9139?au",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMzEwMTl9.5n44zbFTBUJcCISb6358HUzi1cNYjnT8roiA10rxYo0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/questions/614a4f75e8f356250c0980d1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"questions",
+						"614a4f75e8f356250c0980d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/answers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMzEwMTl9.5n44zbFTBUJcCISb6358HUzi1cNYjnT8roiA10rxYo0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questionId\": \"614a47f1e315cb0bcc814aeb\",\r\n    \"key\": \"Developer\",\r\n    \"name\": \"Developer\",\r\n    \"answer\": \"Ask anyone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/answers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNGE0NjY0NmM1NTZiMjE2MGJkYmIxZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjMyMzMxMDM4fQ.LFvi9G903B0_Mfr9mkYwySR2sS1_gU0iNlZhD7L2ulA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/answers/614a4846e315cb0bcc814aed",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMzEwMTl9.5n44zbFTBUJcCISb6358HUzi1cNYjnT8roiA10rxYo0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Specialist\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/answers/614b661de93b1f1ad4a6a0b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"answers",
+						"614b661de93b1f1ad4a6a0b9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/answers/614a4846e315cb0bcc814aed",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNGE0NjY0NmM1NTZiMjE2MGJkYmIxZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjMyMzMxMDM4fQ.LFvi9G903B0_Mfr9mkYwySR2sS1_gU0iNlZhD7L2ulA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/answers/614b661de93b1f1ad4a6a0b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"answers",
+						"614b661de93b1f1ad4a6a0b9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/answers/614a4846e315cb0bcc814aed",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzMzEwMTl9.5n44zbFTBUJcCISb6358HUzi1cNYjnT8roiA10rxYo0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/answers/614b661de93b1f1ad4a6a0b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"answers",
+						"614b661de93b1f1ad4a6a0b9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzNDc3OTN9.HDF78Elgo693Zm9p2uw72X-a7MKp8gMWbawSqsDJIBE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"user123\",\r\n    \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzNDc3OTN9.HDF78Elgo693Zm9p2uw72X-a7MKp8gMWbawSqsDJIBE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"614ba71a1f8cdc34a4abe81c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzNDc3OTN9.HDF78Elgo693Zm9p2uw72X-a7MKp8gMWbawSqsDJIBE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"614ba71a1f8cdc34a4abe81c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MTRhNDY1MzZjNTU2YjIxNjBiZGJiMWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzIzNDc3OTN9.HDF78Elgo693Zm9p2uw72X-a7MKp8gMWbawSqsDJIBE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/users/614ba71a1f8cdc34a4abe81c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"614ba71a1f8cdc34a4abe81c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/documentation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/documentation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"documentation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
