@@ -15,7 +15,7 @@ class AuthRoutes extends BaseRoute {
 
   login() {
     return {
-      path: "/api/login",
+      path: "/login",
       method: "POST",
       options: {
         handler: async (request, headers) => {

@@ -21,7 +21,7 @@ class UserRoutes extends BaseRoute {
 
   create() {
     return {
-      path: "/api/users",
+      path: "/users",
       method: "POST",
       options: {
         handler: async (request, headers) => {
@@ -70,10 +70,11 @@ class UserRoutes extends BaseRoute {
 
   getOne() {
     return {
-      path: "/api/users/{id}",
+      path: "/users/{id}",
       method: "GET",
       options: {
         handler: async (request, headers) => {
+          const role = headers.request.auth.artifacts.decoded.role;
           if (role === "user") {
             return Boom.forbidden(
               "Retrieve user's information allowed to admin users only"
@@ -112,10 +113,11 @@ class UserRoutes extends BaseRoute {
 
   update() {
     return {
-      path: "/api/users/{id}",
+      path: "/users/{id}",
       method: "PATCH",
       options: {
         handler: async (request, headers) => {
+          const role = headers.request.auth.artifacts.decoded.role;
           if (role === "user") {
             return Boom.forbidden(
               "User's role update allowed to admin users only"
@@ -170,10 +172,11 @@ class UserRoutes extends BaseRoute {
 
   delete(id) {
     return {
-      path: "/api/users/{id}",
+      path: "/users/{id}",
       method: "DELETE",
       options: {
         handler: async (request, headers) => {
+          const role = headers.request.auth.artifacts.decoded.role;
           if (role === "user") {
             return Boom.forbidden("User's delete allowed to admin users only");
           }
