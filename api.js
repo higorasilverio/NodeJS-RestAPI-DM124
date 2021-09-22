@@ -1,8 +1,8 @@
+require("dotenv").config();
 const Hapi = require("@hapi/hapi");
 const HapiSwagger = require("hapi-swagger");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
-const JWT_SECRET = "MY_BIG_SECRET_123";
 const HapiJwt = require("hapi-auth-jwt2");
 
 const pckjson = require("./package.json");
@@ -55,7 +55,7 @@ async function main() {
   ]);
 
   app.auth.strategy("jwt", "jwt", {
-    key: JWT_SECRET,
+    key: process.env.JWT_SECRET,
     validate: (data, request) => {
       return {
         isValid: true,
@@ -65,7 +65,10 @@ async function main() {
   app.auth.default("jwt");
 
   app.route([
-    ...mapRoutes(new AuthRoutes(authContext, JWT_SECRET), AuthRoutes.methods()),
+    ...mapRoutes(
+      new AuthRoutes(authContext, process.env.JWT_SECRET),
+      AuthRoutes.methods()
+    ),
     ...mapRoutes(new UserRoutes(usersContext), UserRoutes.methods()),
     ...mapRoutes(new QuestionRoute(questionsContext), QuestionRoute.methods()),
     ...mapRoutes(new AnswerRoutes(answersContext), AnswerRoutes.methods()),

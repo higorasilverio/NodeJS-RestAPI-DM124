@@ -1,11 +1,16 @@
-const ICrud = require("../base/interfaceDb");
+require("dotenv").config();
+
 const Mongoose = require("mongoose");
+
+const ICrud = require("../base/interfaceDb");
+
 const STATUS = {
   0: "Disconnected",
   1: "Connected",
   2: "Connecting",
   3: "Disconnecting",
 };
+
 class MongoDB extends ICrud {
   constructor(connection, schema) {
     super();
@@ -22,7 +27,7 @@ class MongoDB extends ICrud {
 
   static connect() {
     Mongoose.connect(
-      "mongodb+srv://user:password1234@qacluster.t1ys3.mongodb.net/QAdb?retryWrites=true&w=majority",
+      process.env.DB_HOST,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
