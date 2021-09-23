@@ -55,6 +55,20 @@
 
 ---
 
+### Running
+
+##### To work properly, it requires a .env file with three simple variables
+
+> DB_HOST=**_yourMongoDbHostConnectionString_**
+>
+> JWT_SECRET=**_yourJwtSecretString_**
+>
+> BCRYPT_SALT=**_yourBcryptSaltNumber_**
+
+##### At the terminal, run `npm install` , to install all de dependencies, and then `npm start` , to run the application.
+
+---
+
 #### Authentication with OAuth2 support
 
 #### Uses MongoDB as standard database (strategy design pattern allows other dabase structure)
