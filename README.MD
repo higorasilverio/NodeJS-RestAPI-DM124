@@ -1,4 +1,4 @@
-# DM124 - NodeJS REST API
+# NodeJS REST API
 
 ### REST API with Questions, Answers, and Users entities
 
